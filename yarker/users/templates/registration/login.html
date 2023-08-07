@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token %} {% for field in form %}
+  <div>
+    {{field.label_tag}}
+    <div>{{field}}</div>
+  </div>
+  {% endfor %} {% for error in form.non_field_errors %}
+  <div class="login_error_message">{{ error }}</div>
+  {% endfor %}
+  <button type="submit">Войти</button>
+  <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+</form>
+{% endblock %}
