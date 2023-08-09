@@ -7,7 +7,7 @@ urlpatterns = [
     path("", include("users.urls")),
     path(
         "",
-        TemplateView.as_view(template_name="index.html"),
+        TemplateView.as_view(template_name="users/index.html"),
         name="main",
     ),
 ]

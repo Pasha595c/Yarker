@@ -10,7 +10,7 @@ def send_email_for_verify(request, user):
     current_site = get_current_site(request)
     mail_subject = "Активация аккаунта"
     message = render_to_string(
-        "activation_email.html",
+        "users/login/activation_email.html",
         {
             "user": user,
             "domain": current_site.domain,
