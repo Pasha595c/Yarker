@@ -1,12 +1,11 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import (
-    register,
-    registration_success,
-    registration_success,
-    EmailVerify,
+    RegisterView,
+    # registration_success,
+    EmailVerifyView,
     MyLoginView,
-    user_logout,
+    user_logoutView,
 )
 from django.views.generic import TemplateView
 
@@ -16,7 +15,7 @@ urlpatterns = [
         MyLoginView.as_view(template_name="users/login/login.html"),
         name="login",
     ),
-    path("register/", register, name="register"),
+    path("register/", RegisterView, name="register"),
     path(
         "registration-success/",
         MyLoginView.as_view(
@@ -26,7 +25,7 @@ urlpatterns = [
     ),
     path(
         "verify_email/<uidb64>/<token>/",
-        EmailVerify.as_view(),
+        EmailVerifyView.as_view(),
         name="verify_email",
     ),
     path(
@@ -68,5 +67,5 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("user_logout/", user_logout, name="user_logout"),
+    path("user_logout/", user_logoutView, name="user_logout"),
 ]

@@ -1,4 +1,4 @@
-{% extends "users/base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %}
 <form action="{% url 'login' %}" method="post">
   {% csrf_token %} {% for field in form %}
   <div>

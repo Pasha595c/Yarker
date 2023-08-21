@@ -26,7 +26,6 @@ def RegisterView(request):  # Обработка регистрации ново
             # Отправка письма с ссылкой активации, только если пользователь не подтвердил почту
             if not user.email_verify:
                 send_email_for_verify(request, user)
-
             return redirect("registration_success")
     else:
         form = UserCreationForm()
@@ -55,7 +54,7 @@ class MyLoginView(LoginView):
         return context
 
 
-class EmailVerify(View):
+class EmailVerifyView(View):
     """Представление подтверждения Email пользователя"""
 
     def get(self, request, uidb64, token):
@@ -84,6 +83,6 @@ class EmailVerify(View):
         return user
 
 
-def user_logout(request):
+def user_logoutView(request):
     logout(request)
     return redirect("main")
