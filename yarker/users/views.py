@@ -16,7 +16,7 @@ from .forms import UserCreationForm, AuthenticationForm
 User = get_user_model()
 
 
-def register(request):  # Обработка регистрации нового пользователя.
+def RegisterView(request):  # Обработка регистрации нового пользователя.
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -33,10 +33,6 @@ def register(request):  # Обработка регистрации нового
     return render(
         request, "users/registration/registration.html", {"form": form}
     )  # Возвращается страница регистрации с формой или перенаправление на страницу успешной регистрации.
-
-
-def registration_success(request):
-    return render(request, "users/registration/registration_success.html")
 
 
 class MyLoginView(LoginView):
