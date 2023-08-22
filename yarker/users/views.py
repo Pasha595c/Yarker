@@ -14,24 +14,26 @@ from users.utils import send_email_for_verify
 from .forms import UserCreationForm, AuthenticationForm
 
 User = get_user_model()
+"""
+Обработка регистрации нового пользователя.
+Отправка письма с ссылкой активации, только если пользователь не подтвердил почту
+Возвращается страница регистрации с формой или перенаправление на страницу успешной регистрации.
+"""
 
 
-def RegisterView(request):  # Обработка регистрации нового пользователя.
+def RegisterView(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
 
-            # Отправка письма с ссылкой активации, только если пользователь не подтвердил почту
             if not user.email_verify:
                 send_email_for_verify(request, user)
             return redirect("registration_success")
     else:
         form = UserCreationForm()
-    return render(
-        request, "users/registration/registration.html", {"form": form}
-    )  # Возвращается страница регистрации с формой или перенаправление на страницу успешной регистрации.
+    return render(request, "users/registration/registration.html", {"form": form})
 
 
 class MyLoginView(LoginView):
